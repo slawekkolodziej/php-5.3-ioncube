@@ -20,5 +20,3 @@ Alternative command if you wish to run a worker. This command starts Cron and Ex
 ```
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord-worker.conf"]
 ```
-
-- 
