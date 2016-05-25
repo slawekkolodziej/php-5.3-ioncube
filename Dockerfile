@@ -12,6 +12,7 @@ RUN apt-get update \
 
 # Enable mod_rewrite
 RUN a2enmod rewrite
+RUN a2enmod headers
 
 # Install Ioncube
 RUN wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
