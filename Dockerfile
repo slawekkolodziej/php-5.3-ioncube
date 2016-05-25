@@ -40,7 +40,7 @@ RUN wget https://github.com/phpredis/phpredis/archive/2.2.7.tar.gz \
 RUN mkdir -p /usr/local/etc/php/conf.d
 
 # Install extensions
-RUN docker-php-ext-install curl mbstring gd
+RUN docker-php-ext-install curl mbstring gd soap
 
 # Configure PHP
 COPY php/php.ini /usr/local/lib
