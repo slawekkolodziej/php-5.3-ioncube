@@ -17,9 +17,9 @@ RUN a2enmod headers
 # Install mod_cloudflare
 RUN wget -O mod_cloudflare.tar.gz https://codeload.github.com/cloudflare/mod_cloudflare/tar.gz/master \
  && tar xvfz mod_cloudflare.tar.gz \
- && pushd mod_cloudflare-master \
+ && cd mod_cloudflare-master \
  && apxs -a -i -c mod_cloudflare.c \
- && popd \
+ && cd .. \
  && rm -rf mod_cloudflare-master mod_cloudflare.tar.gz
 
 # Install Ioncube
