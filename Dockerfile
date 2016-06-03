@@ -14,6 +14,14 @@ RUN apt-get update \
 RUN a2enmod rewrite
 RUN a2enmod headers
 
+# Install mod_cloudflare
+RUN wget -O mod_cloudflare.tar.gz https://codeload.github.com/cloudflare/mod_cloudflare/tar.gz/master \
+ && tar xvfz mod_cloudflare.tar.gz \
+ && pushd mod_cloudflare-master \
+ && apxs -a -i -c mod_cloudflare.c \
+ && popd \
+ && rm -rf mod_cloudflare-master mod_cloudflare.tar.gz
+
 # Install Ioncube
 RUN wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
  && tar xvfz ioncube_loaders_lin_x86-64.tar.gz \
@@ -40,7 +48,7 @@ RUN wget https://github.com/phpredis/phpredis/archive/2.2.7.tar.gz \
 RUN mkdir -p /usr/local/etc/php/conf.d
 
 # Install extensions
-RUN docker-php-ext-install curl mbstring gd soap
+RUN docker-php-ext-install curl mbstring gd soap calendar xmlrpc xsl tidy mcrypt
 
 # Configure PHP
 COPY php/php.ini /usr/local/lib

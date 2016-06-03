@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-
 PHP_INI_PATH="/usr/local/lib/php.ini"
 
 # Replace path to cache with provided env variable
