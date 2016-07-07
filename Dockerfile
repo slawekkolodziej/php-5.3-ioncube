@@ -6,6 +6,7 @@ RUN apt-get update \
 	vim \
 	exim4-daemon-light \
 	supervisor \
+	libjpeg62-turbo-dev \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
  && find /var/log -type f | while read f; do echo -ne '' > $f; done;
@@ -46,6 +47,10 @@ RUN wget https://github.com/phpredis/phpredis/archive/2.2.7.tar.gz \
 
 # Create directory for extensions config files
 RUN mkdir -p /usr/local/etc/php/conf.d
+
+# Configure extensions
+RUN docker-php-ext-configure \
+	gd --with-jpeg-dir=/usr/lib/x86_64-linux-gnu
 
 # Install extensions
 RUN docker-php-ext-install curl mbstring gd soap calendar xmlrpc xsl
