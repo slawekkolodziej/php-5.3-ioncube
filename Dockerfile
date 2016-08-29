@@ -7,6 +7,7 @@ RUN apt-get update \
 	exim4-daemon-light \
 	supervisor \
 	libjpeg62-turbo-dev \
+	php5-memcached \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
  && find /var/log -type f | while read f; do echo -ne '' > $f; done;
@@ -33,18 +34,6 @@ RUN wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-
  && cp "ioncube/ioncube_loader_lin_${PHP_VERSION}_ts.so" $PHP_EXT_DIR \
  && rm -rf ioncube ioncube_loaders_lin_x86-64.tar.gz
 
-# Install PHP-Redis
-RUN wget https://github.com/phpredis/phpredis/archive/2.2.7.tar.gz \
- && tar xvfz 2.2.7.tar.gz \
- && cd phpredis-2.2.7 \
- && phpize \
- && ./configure \
- && make \
- && make install \
- && cd .. \
- && rm -rf phpredis-2.2.7 2.2.7.tar.gz
-
-
 # Create directory for extensions config files
 RUN mkdir -p /usr/local/etc/php/conf.d
 
@@ -54,6 +43,8 @@ RUN docker-php-ext-configure \
 
 # Install extensions
 RUN docker-php-ext-install curl mbstring gd soap calendar xmlrpc xsl
+
+RUN yes "" | pecl install memcache
 
 # Configure PHP
 COPY php/php.ini /usr/local/lib
