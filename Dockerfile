@@ -44,7 +44,7 @@ RUN docker-php-ext-configure \
 # Install extensions
 RUN docker-php-ext-install curl mbstring gd soap calendar xmlrpc xsl
 
-RUN yes "" | pecl install memcache
+RUN yes "" | pecl install memcache xdebug-2.2.7 ZendOpcache
 
 # Configure PHP
 COPY php/php.ini /usr/local/lib
