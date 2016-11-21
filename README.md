@@ -9,13 +9,13 @@ It adds support for:
 
 # Commands
 
-Default command runs supervisord which then starts Apache and Exim.
+Default command runs supervisord which then starts nginx, php-fpm and exim.
 
 ```
 ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord-web.conf"]
 ```
 
-Alternative command if you wish to run a worker. This command starts Cron and Exim:
+Alternative command if you wish to run a worker. This command starts cron and exim:
 
 ```
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord-worker.conf"]
