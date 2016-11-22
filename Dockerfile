@@ -93,7 +93,9 @@ RUN wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-
  && rm -rf ioncube ioncube_loaders_lin_x86-64.tar.gz
 
 # Create directory for extensions config files
-RUN mkdir -p /usr/local/etc/php/conf.d
+RUN mkdir -p \
+    /usr/local/etc/php/conf.d \
+    /etc/php
 
 # Configure extensions
 RUN docker-php-ext-configure \
@@ -109,7 +111,7 @@ RUN yes "" | pecl install memcache xdebug-2.2.7 ZendOpcache zenovich/runkit
 # Configure PHP
 COPY php/php.ini /usr/local/lib
 RUN mkdir -p /usr/local/etc/php/conf.d
-RUN mv /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fpm.conf
+RUN mv /usr/local/etc/php-fpm.conf.default /etc/php/php-fpm.conf
 
 # Configure exim
 COPY exim/set-exim4-update-conf /bin/
