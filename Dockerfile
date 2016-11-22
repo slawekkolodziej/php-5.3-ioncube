@@ -118,7 +118,6 @@ COPY exim/set-exim4-update-conf /bin/
 RUN chmod a+x /bin/set-exim4-update-conf
 
 # Configure supervisor
-COPY supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 COPY supervisor/supervisord-*.conf /etc/supervisor/conf.d/
 RUN mkdir -p \
 	/var/lock/apache2 \
