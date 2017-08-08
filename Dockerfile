@@ -36,7 +36,7 @@ RUN mkdir -p $PHP_INI_DIR/conf.d
 
 # php 5.3 needs older autoconf
 RUN set -x \
- && apt-get update && apt-get install -y autoconf2.13 && rm -r /var/lib/apt/lists/* \
+ && apt-get update && apt-get install -y autoconf2.13 zlib1g zlib1g-dev && rm -r /var/lib/apt/lists/* \
  && curl -SLO http://launchpadlibrarian.net/140087283/libbison-dev_2.7.1.dfsg-1_amd64.deb \
  && curl -SLO http://launchpadlibrarian.net/140087282/bison_2.7.1.dfsg-1_amd64.deb \
  && dpkg -i libbison-dev_2.7.1.dfsg-1_amd64.deb \
@@ -58,6 +58,8 @@ RUN set -x \
     --with-mysqli \
     --with-pdo-mysql \
     --with-openssl=/usr/local/ssl \
+    --with-zlib \
+    --with-zlib-dir=/lib/x86_64-linux-gnu \
     --enable-fpm \
     --with-fpm-user=www-data \
     --with-fpm-group=www-data \
